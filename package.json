@@ -1,0 +1,30 @@
+{
+  "name": "dapp-token-sale",
+  "version": "1.0.0",
+  "description": "Dapp Token Sale ICO",
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "Gregory",
+  "license": "ISC",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  },
+  "dependencies": {
+    "ajv": "^6.5.0",
+    "alexa-sdk": "^1.0.25",
+    "bootstrap": "^4.1.1",
+    "fs-extra": "^6.0.1",
+    "jquery": "^3.3.1",
+    "lerna": "^2.11.0",
+    "node-gyp": "^3.6.2",
+    "npm-git-install": "^0.3.0",
+    "popper.js": "^1.14.3",
+    "tar": "^4.4.4",
+    "web3": "github:ethereum/web3.js"
+  }
+}
