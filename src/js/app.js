@@ -1,3 +1,4 @@
+
 App = {
   web3Provider: null,
   contracts: {},
@@ -11,7 +12,7 @@ App = {
     console.log("App initialized...")
     return App.initWeb3();
   },
-
+  
   initWeb3: function() {
     if (typeof web3 !== 'undefined') {
       // If a web3 instance is already provided by Meta Mask.
@@ -37,7 +38,8 @@ App = {
         App.contracts.DappToken = TruffleContract(dappToken);
         App.contracts.DappToken.setProvider(App.web3Provider);
         App.contracts.DappToken.deployed().then(function(dappToken) {
-          console.log("Dapp Token Address:", dappToken.address);
+          console.log("Dappy Token Address:", dappToken.address);
+          dappToken.totalSupply().then((supply)=>{console.log(supply.toNumber())})
         });
 
         App.listenForEvents();
@@ -109,20 +111,28 @@ App = {
   },
 
   buyTokens: function() {
+
+    var numberOfTokens = $('#numberOfTokens').val();
+    console.log(numberOfTokens)
+    console.log(App.tokenPrice)
+    
+    const options = {
+      from: App.account,
+      value: numberOfTokens * App.tokenPrice,
+    }
+
+    console.log(options)
+
     $('#content').hide();
     $('#loader').show();
-    var numberOfTokens = $('#numberOfTokens').val();
     App.contracts.DappTokenSale.deployed().then(function(instance) {
-      return instance.buyTokens(numberOfTokens, {
-        from: App.account,
-        value: numberOfTokens * App.tokenPrice,
-        gas: 500000 // Gas limit
-      });
+      console.log(instance)
+      return instance.buyTokens(numberOfTokens, options);
     }).then(function(result) {
       console.log("Tokens bought...")
       $('form').trigger('reset') // reset number of tokens in form
       // Wait for Sell event
-    });
+    }).catch(error => console.log(error));
   }
 }
 

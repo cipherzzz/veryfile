@@ -21,10 +21,10 @@ contract DappTokenSale {
     }
 
     function buyTokens(uint256 _numberOfTokens) public payable {
-        require(msg.value == multiply(_numberOfTokens, tokenPrice));
-        require(tokenContract.balanceOf(this) >= _numberOfTokens);
-        require(tokenContract.transfer(msg.sender, _numberOfTokens));
-
+        require(msg.value == multiply(_numberOfTokens, tokenPrice), "weird ass error");
+        require(tokenContract.balanceOf(this) >= _numberOfTokens, "2 weird ass error");
+        require(tokenContract.transfer(msg.sender, _numberOfTokens), "3 weird ass error");
+        
         tokensSold += _numberOfTokens;
 
         Sell(msg.sender, _numberOfTokens);

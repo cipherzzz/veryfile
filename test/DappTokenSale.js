@@ -37,7 +37,10 @@ contract('DappTokenSale', function(accounts) {
       return tokenInstance.transfer(tokenSaleInstance.address, tokensAvailable, { from: admin })
     }).then(function(receipt) {
       numberOfTokens = 10;
-      return tokenSaleInstance.buyTokens(numberOfTokens, { from: buyer, value: numberOfTokens * tokenPrice })
+      console.log(tokenPrice)
+      const options = { from: buyer, value: numberOfTokens * tokenPrice }
+      console.log(options)
+      return tokenSaleInstance.buyTokens(numberOfTokens, options)
     }).then(function(receipt) {
       assert.equal(receipt.logs.length, 1, 'triggers one event');
       assert.equal(receipt.logs[0].event, 'Sell', 'should be the "Sell" event');
